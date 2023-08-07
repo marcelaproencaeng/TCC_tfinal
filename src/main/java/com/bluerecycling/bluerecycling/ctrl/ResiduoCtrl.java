@@ -43,7 +43,7 @@ public class ResiduoCtrl {
 
     @PutMapping("/{idResiduo}/{quantidade}")
     public ResponseEntity<Residuo> atualizarQuantidadeDeResiduoPorId(@PathVariable("idResiduo") Long idResiduo,
-                                                                 @PathVariable("quantidade") Double quantidade) {
+                                                                     @PathVariable("quantidade") Double quantidade) {
         residuoService.atualizarQuantidadePorId(quantidade, idResiduo);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
