@@ -24,7 +24,7 @@ public class UsuarioService {
         Usuario usuarioASerAdicionado = new Usuario();
 
         usuarioASerAdicionado.setIdUsuario(usuarioDTO.getIdUsuario());
-        usuarioASerAdicionado.setHaveTransporte(usuarioDTO.getHaveTransporte());
+        usuarioASerAdicionado.setHasTransporte(usuarioDTO.getHasTransporte());
         usuarioASerAdicionado.setIsVendedor(usuarioDTO.getIsVendedor());
         usuarioASerAdicionado.setPlano(usuarioDTO.getPlano());
         usuarioASerAdicionado.setResiduo(usuarioDTO.getResiduo());

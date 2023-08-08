@@ -1,6 +1,5 @@
 package com.bluerecycling.bluerecycling.dto;
 
-import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,9 +7,7 @@ import lombok.Data;
 @Builder
 public class LoginDTO {
     private Long idLogin;
-
     private String cnpj;
-
     private String senha;
 
 

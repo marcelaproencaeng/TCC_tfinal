@@ -1,6 +1,5 @@
 package com.bluerecycling.bluerecycling.model;
 
-import com.bluerecycling.bluerecycling.model.enuns.TipoNicho;
 import com.bluerecycling.bluerecycling.model.enuns.TipoTransacao;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,14 +21,15 @@ public class Transacao {
     private TipoTransacao tipoTransacao;
     @Column
     private BigDecimal valor;
-    @Column
     private Boolean hasMaisDeDoisUsuarios;
+    @Column
+    private Boolean hasMaisDeUmResiduo;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "nota_id")
     private NotaFiscal nota;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "transacao_id")
-    private Usuario usuario;
+    List<Usuario> usuarios;
     //    @Column
 //    @Enumerated(EnumType.STRING)
 //    private TipoNicho nicho;
@@ -44,5 +44,6 @@ public class Transacao {
     @Column
     @OneToOne(mappedBy = "transacao")
     private Intermediacao intermediacao;
+
 
 }
