@@ -39,9 +39,9 @@ public class UsuarioCtrl {
         this.usuarioService.deletar(razaoSocial);
     }
     @PutMapping("/{idUsuario}/{plano}")
-    public ResponseEntity<Residuo> atualizarPlanoDeUsuarioPorId(@PathVariable("idUsuario") Long idUsuario,
+    public ResponseEntity<Residuo> atualizarUsuarioPorPlano(@PathVariable("idUsuario") Long idUsuario,
                                                                 @PathVariable("plano") Plano plano) {
-        usuarioService.atualizarPlanoPorId(plano, idUsuario);
+        usuarioService.atualizarUsuarioPorPlano(plano, idUsuario);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

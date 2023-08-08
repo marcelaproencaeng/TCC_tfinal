@@ -61,7 +61,7 @@ public class UsuarioService {
         }
 
 
-    public Usuario atualizarPlanoPorId(Plano novoPlano, Long idUsuario) {
+    public Usuario atualizarUsuarioPorPlano(Plano novoPlano, Long idUsuario) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();

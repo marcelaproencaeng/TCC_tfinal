@@ -1,9 +1,9 @@
 package com.bluerecycling.bluerecycling.model;
 
+import com.bluerecycling.bluerecycling.model.enuns.TipoNicho;
 import com.bluerecycling.bluerecycling.model.enuns.TipoTransacao;
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,15 +24,15 @@ public class Transacao {
     private Boolean hasMaisDeDoisUsuarios;
     @Column
     private Boolean hasMaisDeUmResiduo;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nota_id")
+//    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "transacao_id")
     private NotaFiscal nota;
-    @OneToMany(cascade = CascadeType.ALL)
+//    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "transacao_id")
     List<Usuario> usuarios;
-    //    @Column
-//    @Enumerated(EnumType.STRING)
-//    private TipoNicho nicho;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private TipoNicho nicho;
     @Column
     @Temporal(TemporalType.TIME)
     private LocalDateTime entrada;

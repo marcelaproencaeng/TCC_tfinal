@@ -23,7 +23,7 @@ public class LoginCtrl {
         this.loginService = loginService;
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<Login> create(@RequestBody LoginDTO loginDTO) {
         System.out.println("inserindo login" + loginDTO.getIdLogin());
         Login login = loginService.adicionarLogin(loginDTO);

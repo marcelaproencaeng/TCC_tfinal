@@ -13,7 +13,7 @@ public class Endereco {
     @Column
     private Long idEndereco;
     @OneToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_endereco")
     private Usuario usuario;
     @Column
     private String Rua;
