@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BluerecyclingApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BluerecyclingApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BluerecyclingApplication.class, args);
+    }
+
 
 }
