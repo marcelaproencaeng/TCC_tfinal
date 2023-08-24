@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/health")
 @CrossOrigin(origins = "*")
-public class HealthCtrl {
+public class  HealthCtrl {
     @GetMapping
     public ResponseEntity<String> sayHello(){
         return ResponseEntity.ok("Requisição de teste para API do bluerecycling");

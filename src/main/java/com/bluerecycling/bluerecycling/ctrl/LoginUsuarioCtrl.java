@@ -25,11 +25,20 @@ public class LoginUsuarioCtrl {
 
     @PostMapping
     public ResponseEntity<LoginUsuario> create(@RequestBody LoginUsuarioDTO loginDTO) {
-        System.out.println("inserindo login" + loginDTO.getIdLogin());
+        System.out.println("inserindo login" + loginDTO.getId());
         LoginUsuario login = loginUsuarioService.adicionarLogin(loginDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
 
     }
+//    public ResponseEntity<String> login(@RequestBody LoginUsuarioDTO loginUsuarioDTO) {
+//        boolean loginSuccessful = loginUsuarioService.verifyLogin(loginUsuarioDTO.getIdLogin(), loginUsuarioDTO.getSenha());
+//
+//        if (loginSuccessful) {
+//            return ResponseEntity.ok("Login successful");
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
+//        }
+//    }
 
     @GetMapping
     public ResponseEntity<List<LoginUsuario>> buscarTodos() {
@@ -46,7 +55,7 @@ public class LoginUsuarioCtrl {
     @PutMapping("/{id}/{senha}")
     public ResponseEntity<LoginUsuario> atualizarSenhaDeLoginPorId(@PathVariable("id") Long id,
                                                                    @PathVariable("senha") String senha) {
-        loginUsuarioService.atualizarLoginPorId(senha,id);
+        loginUsuarioService.atualizarLoginPorId(senha, id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
