@@ -47,9 +47,9 @@ public class LoginUsuarioCtrl {
 
     }
 
-    @DeleteMapping("/{id}")
-    public void deletarLoginPorId(@PathVariable("id") Long id) {
-        this.loginUsuarioService.deletar(id);
+    @DeleteMapping("/{cnpj}")
+    public void deletarLoginPorCnpj(@PathVariable("cnpj") String cnpj) {
+        this.loginUsuarioService.deletar(cnpj);
     }
 
     @PutMapping("/{id}/{senha}")

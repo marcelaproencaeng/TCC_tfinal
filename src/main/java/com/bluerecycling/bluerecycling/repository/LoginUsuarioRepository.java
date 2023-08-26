@@ -10,7 +10,5 @@ public interface LoginUsuarioRepository extends JpaRepository<LoginUsuario, Long
     Optional<LoginUsuario> findById(Long id);
 
 
-
-
-
+    LoginUsuario findByCnpj(String cnpj);
 }

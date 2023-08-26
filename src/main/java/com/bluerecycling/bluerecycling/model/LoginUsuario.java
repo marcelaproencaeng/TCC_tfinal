@@ -12,7 +12,7 @@ public class LoginUsuario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Long id;
-    @Column
+    @Column(length = 14)
     private String cnpj;
     @Column
     private String senha;

@@ -22,31 +22,44 @@ public class LoginUsuarioService {
         LoginUsuario loginASerAdicionado = new LoginUsuario();
         loginASerAdicionado.setCnpj(loginUsuarioDTO.getCnpj());
         loginASerAdicionado.setSenha(loginUsuarioDTO.getSenha());
-        Optional<LoginUsuario> loginUsuarioOptional = findById(loginASerAdicionado.getId());
+        LoginUsuario loginUsuario = findByCnpj(loginASerAdicionado.getCnpj());
 
-        if (loginUsuarioOptional.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login" + loginUsuarioOptional.get().getId()
+        if (loginUsuario != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login" + loginUsuario.getCnpj()
                     + "já existe!");
         }
         return loginUsuarioRepository.save(loginASerAdicionado);
 
     }
+
     public List<LoginUsuario> buscarTodos() {
         return loginUsuarioRepository.findAll();
     }
 
-    public void deletar(Long id) {
-        Optional<LoginUsuario> loginParaRemover = findById(id);
-        if (loginParaRemover.isEmpty()) {
+    public void deletar(String cnpj) {
+        LoginUsuario loginParaRemover = findByCnpj(cnpj);
+        if (loginParaRemover == null) {
 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Não é possível remover um login por id inexistente");
+                    "Não é possível remover um login por cnpj inexistente");
         }
-        loginUsuarioRepository.delete(loginParaRemover.get());
+        loginUsuarioRepository.delete(loginParaRemover);
     }
+//      public void deletar(String userName) {
+//        Usuario usuarioParaRemover = findByUsername(userName);
+//        if (usuarioParaRemover == null) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+//                    "Não é possível remover usuário inexistente");
+//        }
+//        usuarioRepository.delete(usuarioParaRemover);
+//    }
 
     private Optional<LoginUsuario> findById(Long id) {
         return loginUsuarioRepository.findById(id);
+    }
+
+    public LoginUsuario findByCnpj(String cnpj) {
+        return loginUsuarioRepository.findByCnpj(cnpj);
     }
 
     public LoginUsuario atualizarLoginPorId(String novaSenha, Long id) {

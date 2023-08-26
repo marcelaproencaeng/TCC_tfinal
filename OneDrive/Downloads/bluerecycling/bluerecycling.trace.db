@@ -1,0 +1,6 @@
+2023-08-26 01:44:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CNPJ CHARACTER VARYING(14)": "'1234567891011121315' (19)"; SQL statement:
+insert into tb_login_usuario (cnpj,senha,id) values (?,?,?) [22001-214]
+2023-08-26 01:44:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CNPJ CHARACTER VARYING(14)": "'1234567891011121315' (19)"; SQL statement:
+insert into tb_login_usuario (cnpj,senha,id) values (?,?,?) [22001-214]

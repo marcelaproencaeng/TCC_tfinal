@@ -558,3 +558,15 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/marce/D
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 137 more
+2023-08-26 01:36:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CNPJ CHARACTER VARYING(14)": "'1234567891011121315' (19)"; SQL statement:
+insert into tb_login_usuario (cnpj,senha,id) values (?,?,?) [22001-214]
+2023-08-26 01:36:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CNPJ CHARACTER VARYING(14)": "'1234567891011121315' (19)"; SQL statement:
+insert into tb_login_usuario (cnpj,senha,id) values (?,?,?) [22001-214]
+2023-08-26 01:36:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CNPJ CHARACTER VARYING(14)": "'1234567891011121315' (19)"; SQL statement:
+insert into tb_login_usuario (cnpj,senha,id) values (?,?,?) [22001-214]
+2023-08-26 01:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CNPJ CHARACTER VARYING(14)": "'1234567891011121315' (19)"; SQL statement:
+insert into tb_login_usuario (cnpj,senha,id) values (?,?,?) [22001-214]
