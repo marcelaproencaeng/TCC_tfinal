@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Table(name = "tb_login")
 @Data
-public class LoginUsuarioModel {
+public class LoginUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
@@ -15,4 +15,14 @@ public class LoginUsuarioModel {
     private String cnpj;
     @Column
     private String senha;
+
+    public LoginUsuario(){
+
+    }
+
+    public LoginUsuario(Long id, String cnpj, String senha) {
+        this.id = id;
+        this.cnpj = cnpj;
+        this.senha = senha;
+    }
 }
