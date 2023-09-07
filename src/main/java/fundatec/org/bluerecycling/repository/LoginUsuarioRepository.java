@@ -12,5 +12,5 @@ public interface LoginUsuarioRepository extends JpaRepository<LoginUsuario, Long
 
     LoginUsuario findByCnpj(String cnpj);
 
-    void findByUserName(String userName);
+    LoginUsuario findByUserName(String userName);
 }

@@ -4,7 +4,6 @@ import fundatec.org.bluerecycling.dto.*;
 import fundatec.org.bluerecycling.model.LoginUsuario;
 import fundatec.org.bluerecycling.model.Usuario;
 import fundatec.org.bluerecycling.repository.LoginUsuarioRepository;
-import fundatec.org.bluerecycling.repository.ResiduoRepository;
 import fundatec.org.bluerecycling.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,19 +14,18 @@ import java.util.Optional;
 @Service
 public class LoginUsuarioService {
     private final LoginUsuarioRepository loginUsuarioRepository;
-    private final ResiduoRepository residuoRepository;
+
     private final UsuarioRepository usuarioRepository;
 
     public LoginUsuarioService(LoginUsuarioRepository loginUsuarioRepository,
-                               ResiduoRepository residuoRepository, UsuarioRepository usuarioRepository) {
+                               UsuarioRepository usuarioRepository) {
         this.loginUsuarioRepository = loginUsuarioRepository;
-        this.residuoRepository = residuoRepository;
         this.usuarioRepository = usuarioRepository;
     }
 
-    public LoginUsuario adicionarLogin(LoginUsuarioDTO loginUsuarioDTO,UsuarioDTO usuarioDTO) {
+    public LoginUsuario adicionarLogin(LoginUsuarioDTO loginUsuarioDTO) {
 
-        Usuario usuario = usuarioRepository.findByCnpj(usuarioDTO.getCnpj());
+        Usuario usuario = usuarioRepository.findByCnpj(loginUsuarioDTO.getUserName());
 
 //        Optional<Residuo> residuo = residuoRepository.findById(residuoDTO.getIdResiduo());
         if (usuario.usuarioExists(usuario) == false | usuario == null) {
@@ -35,31 +33,30 @@ public class LoginUsuarioService {
                     "Login inválido" + usuario.getCnpj() +
                             "usuário não existe e/ou não está cadastrado");
         }
-//        Usuario usuarioASerAdicionado = new Usuario();
-//        usuarioASerAdicionado.setCnpj(usuarioDTO.getCnpj());
-//        usuarioASerAdicionado.setResiduo(usuarioDTO.getResiduo());
-//        usuarioASerAdicionado.setPlano(usuarioDTO.getPlano());
-//        usuarioASerAdicionado.setContato(usuarioDTO.getContato());
-//        usuarioASerAdicionado.setEmail(usuarioDTO.getEmail());
-//        usuarioASerAdicionado.setHasTransporte(usuarioDTO.getHasTransporte());
-//        usuarioASerAdicionado.setHasResiduo(usuarioDTO.getHasResiduo());
-//        usuarioASerAdicionado.setRazaoSocial(usuarioDTO.getRazaoSocial());
-//        Usuario usuario1 = findByRazaoSocial(usuarioASerAdicionado.getCnpj());
-//        if (usuario1 != null) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário" + usuario1.getCnpj() +
-//                    "já existe!");
-//        }
+        Usuario usuarioASerAdicionado = new Usuario();
+        usuarioASerAdicionado.setCnpj(usuario.getCnpj());
+        usuarioASerAdicionado.setResiduo(usuario.getResiduo());
+        usuarioASerAdicionado.setPlano(usuario.getPlano());
+        usuarioASerAdicionado.setContato(usuario.getContato());
+        usuarioASerAdicionado.setEmail(usuario.getEmail());
+        usuarioASerAdicionado.setHasTransporte(usuario.getHasTransporte());
+        usuarioASerAdicionado.setHasResiduo(usuario.getHasResiduo());
+        usuarioASerAdicionado.setRazaoSocial(usuario.getRazaoSocial());
+        Usuario usuario1 = findByRazaoSocial(usuarioASerAdicionado.getCnpj());
+        if (usuario1 != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário" + usuario1.getCnpj() +
+                    "já existe!");
+        }
         LoginUsuario loginASerAdicionado = new LoginUsuario();
         loginASerAdicionado.setUserName(loginUsuarioDTO.getUserName());
         loginASerAdicionado.setSenha(loginUsuarioDTO.getSenha());
         LoginUsuario loginUsuario = findByUserName(loginASerAdicionado.getUserName());
         loginUsuarioRepository.save(loginASerAdicionado);
-         return loginASerAdicionado;
+        return loginASerAdicionado;
     }
 
     private LoginUsuario findByUserName(String userName) {
-        loginUsuarioRepository.findByUserName(userName);
-
+        return loginUsuarioRepository.findByUserName(userName);
     }
 
     public List<LoginUsuario> buscarTodos() {
@@ -128,9 +125,11 @@ public class LoginUsuarioService {
     public LoginUsuario findByCnpj(String cnpj) {
         return loginUsuarioRepository.findByCnpj(cnpj);
     }
+
     public Usuario findByRazaoSocial(String razaoSocial) {
         return usuarioRepository.findByRazaoSocial(razaoSocial);
     }
+
     public LoginUsuario atualizarLoginPorId(String novaSenha, Long id) {
 
         Optional<LoginUsuario> loginUsuarioOptional = loginUsuarioRepository.findById(id);
