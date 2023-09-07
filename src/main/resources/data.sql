@@ -1,0 +1,1 @@
+INSERT INTO tb_residuo (id_residuo,nome,classificacao,nicho,quantidade,valor) VALUES (1,'metal','NAO_PERIGOSO','SIDERURGICO', 10.000,15.00);

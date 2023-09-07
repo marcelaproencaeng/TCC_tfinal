@@ -23,10 +23,10 @@ public class ResiduoService {
         Residuo residuoASerAdicionado = new Residuo();
         residuoASerAdicionado.setIdResiduo(residuoDTO.getIdResiduo());
         residuoASerAdicionado.setNome(residuoDTO.getNome());
-        residuoASerAdicionado.setNicho(residuoDTO.getNicho());
-        residuoASerAdicionado.setValor(residuoDTO.getValor());
-        residuoASerAdicionado.setQuantidade(residuoDTO.getQuantidade());
         residuoASerAdicionado.setClassificacao(residuoDTO.getClassificacao());
+        residuoASerAdicionado.setNicho(residuoDTO.getNicho());
+        residuoASerAdicionado.setQuantidade(residuoDTO.getQuantidade());
+        residuoASerAdicionado.setValor(residuoDTO.getValor());
         Residuo residuo = findByNome(residuoASerAdicionado.getNome());
 
         if (residuo != null) {
@@ -54,16 +54,16 @@ public class ResiduoService {
     }
 
 
-    public Residuo atualizarQuantidadePorId(Double novaQuantidade, Long idResiduo) {
+    public Residuo atualizarQuantidadePorId(Double novaQuantidade, Long id) {
 
-        Optional<Residuo> residuoOptional = residuoRepository.findById(idResiduo);
+        Optional<Residuo> residuoOptional = residuoRepository.findById(id);
         if (residuoOptional.isPresent()) {
             Residuo residuo = residuoOptional.get();
             residuo.setQuantidade(novaQuantidade);
             return residuoRepository.save(residuo);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Resíduo não encontrado com o id" + idResiduo);
+                    "Resíduo não encontrado com o id" + id);
         }
     }
 }

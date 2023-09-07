@@ -10,11 +10,11 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/residuos")
 @CrossOrigin(origins = "*")
-public class ResiduoCTRL {
+public class ResiduoController {
 
     private ResiduoService residuoService;
 
-    public ResiduoCTRL(ResiduoService residuoService) {
+    public ResiduoController(ResiduoService residuoService) {
         this.residuoService = residuoService;
     }
 

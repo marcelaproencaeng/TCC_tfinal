@@ -1,12 +1,19 @@
 package fundatec.org.bluerecycling.model;
 
-
 import fundatec.org.bluerecycling.model.enuns.TipoNicho;
 import fundatec.org.bluerecycling.model.enuns.TipoResiduo;
 import jakarta.persistence.*;
 import lombok.Data;
+//import lombok.*;
 import java.math.BigDecimal;
 
+
+//@Getter
+//@Setter
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@EqualsAndHashCode
+//@ToString
 @Entity
 @Table(name = "tb_residuo")
 @Data
@@ -20,7 +27,7 @@ public class Residuo {
     @Column
     @Enumerated(EnumType.STRING)
     private TipoResiduo classificacao;
-//    @JoinColumn(name = "id_residuo")
+    @JoinColumn(name = "id_residuo")
     @Column
     @Enumerated(EnumType.STRING)
     private TipoNicho nicho;
@@ -28,13 +35,17 @@ public class Residuo {
     private Double quantidade;
     @Column
     private BigDecimal valor;
+    @Column(name = "id_residuo")
+    private Usuario usuario;
 
     public Residuo() {
 
     }
 
     public Residuo(Long idResiduo, String nome,
-                   TipoResiduo classificacao, TipoNicho nicho, Double quantidade, BigDecimal valor) {
+                   TipoResiduo classificacao, TipoNicho nicho,
+                   Double quantidade, BigDecimal valor) {
+
 
         this.idResiduo = idResiduo;
         this.nome = nome;
