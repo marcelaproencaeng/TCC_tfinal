@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 //import lombok.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 //@Getter
@@ -35,8 +36,8 @@ public class Residuo {
     private Double quantidade;
     @Column
     private BigDecimal valor;
-    @Column(name = "id_residuo")
-    private Usuario usuario;
+    @ManyToMany(mappedBy = "residuos")
+    private List<Usuario> usuarios;
 
     public Residuo() {
 
@@ -44,8 +45,7 @@ public class Residuo {
 
     public Residuo(Long idResiduo, String nome,
                    TipoResiduo classificacao, TipoNicho nicho,
-                   Double quantidade, BigDecimal valor) {
-
+                   Double quantidade, BigDecimal valor, List<Usuario> usuarios) {
 
         this.idResiduo = idResiduo;
         this.nome = nome;
@@ -53,6 +53,7 @@ public class Residuo {
         this.nicho = nicho;
         this.quantidade = quantidade;
         this.valor = valor;
+        this.usuarios = usuarios;
     }
 }
 

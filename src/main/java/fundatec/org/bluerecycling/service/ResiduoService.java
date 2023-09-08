@@ -13,11 +13,9 @@ import java.util.Optional;
 public class ResiduoService {
 
     private final ResiduoRepository residuoRepository;
-
     public ResiduoService(ResiduoRepository residuoRepository) {
         this.residuoRepository = residuoRepository;
     }
-
     public Residuo adicionarResiduo(ResiduoDTO residuoDTO) {
 
         Residuo residuoASerAdicionado = new Residuo();

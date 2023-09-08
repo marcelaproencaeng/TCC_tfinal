@@ -6,7 +6,6 @@ import fundatec.org.bluerecycling.model.enuns.TipoNicho;
 import fundatec.org.bluerecycling.model.enuns.TipoResiduo;
 import lombok.Builder;
 import lombok.Data;
-
 import java.math.BigDecimal;
 @Data
 @Builder

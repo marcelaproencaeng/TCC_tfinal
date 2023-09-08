@@ -2,13 +2,12 @@ package fundatec.org.bluerecycling.ctrl;
 
 import fundatec.org.bluerecycling.dto.LoginUsuarioDTO;
 import fundatec.org.bluerecycling.model.LoginUsuario;
-import fundatec.org.bluerecycling.model.Residuo;
 import fundatec.org.bluerecycling.service.LoginUsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @RestController
 @RequestMapping("api/v1/logins")
@@ -21,12 +20,8 @@ public class LoginUsuarioController {
     }
 
     @PostMapping
-//    public ResponseEntity<LoginUsuario> create(@RequestBody LoginUsuarioDTO loginDTO) {
-//        System.out.println("inserindo login" + loginDTO.getIdLogin());
-//        LoginUsuario login = loginUsuarioService.adicionarLogin(loginDTO);
-//        return ResponseEntity.status(HttpStatus.OK).build();
     public ResponseEntity<LoginUsuario> create(@RequestBody LoginUsuarioDTO loginUsuarioDTO) {
-        System.out.println("inserindo login" + loginUsuarioDTO.getIdLogin());
+        System.out.println("inserindo login" + loginUsuarioDTO.getUserName());
         LoginUsuario login = loginUsuarioService.adicionarLogin(loginUsuarioDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

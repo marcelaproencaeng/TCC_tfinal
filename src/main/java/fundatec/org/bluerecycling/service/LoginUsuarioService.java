@@ -14,7 +14,6 @@ import java.util.Optional;
 @Service
 public class LoginUsuarioService {
     private final LoginUsuarioRepository loginUsuarioRepository;
-
     private final UsuarioRepository usuarioRepository;
 
     public LoginUsuarioService(LoginUsuarioRepository loginUsuarioRepository,
@@ -32,21 +31,26 @@ public class LoginUsuarioService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Login inválido" + usuario.getCnpj() +
                             "usuário não existe e/ou não está cadastrado");
+
         }
+
         Usuario usuarioASerAdicionado = new Usuario();
         usuarioASerAdicionado.setCnpj(usuario.getCnpj());
-        usuarioASerAdicionado.setResiduo(usuario.getResiduo());
-        usuarioASerAdicionado.setPlano(usuario.getPlano());
-        usuarioASerAdicionado.setContato(usuario.getContato());
+        usuarioASerAdicionado.setResiduos(usuario.getResiduos());
+//        usuarioASerAdicionado.setPlano(usuario.getPlano());
+//        usuarioASerAdicionado.setContato(usuario.getContato());
         usuarioASerAdicionado.setEmail(usuario.getEmail());
         usuarioASerAdicionado.setHasTransporte(usuario.getHasTransporte());
         usuarioASerAdicionado.setHasResiduo(usuario.getHasResiduo());
         usuarioASerAdicionado.setRazaoSocial(usuario.getRazaoSocial());
-        Usuario usuario1 = findByRazaoSocial(usuarioASerAdicionado.getCnpj());
+
+        Usuario usuario1 = findByCnpj(usuarioASerAdicionado.getCnpj());
         if (usuario1 != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário" + usuario1.getCnpj() +
                     "já existe!");
+
         }
+
         LoginUsuario loginASerAdicionado = new LoginUsuario();
         loginASerAdicionado.setUserName(loginUsuarioDTO.getUserName());
         loginASerAdicionado.setSenha(loginUsuarioDTO.getSenha());
@@ -55,8 +59,9 @@ public class LoginUsuarioService {
         return loginASerAdicionado;
     }
 
-    private LoginUsuario findByUserName(String userName) {
-        return loginUsuarioRepository.findByUserName(userName);
+    private Usuario findByCnpj(String cnpj) {
+
+        return loginUsuarioRepository.findByCnpj(cnpj);
     }
 
     public List<LoginUsuario> buscarTodos() {
@@ -100,8 +105,8 @@ public class LoginUsuarioService {
 //
 //    }
 
-    public void deletar(String cnpj) {
-        LoginUsuario loginParaRemover = findByCnpj(cnpj);
+    public void deletar(String userName) {
+        LoginUsuario loginParaRemover = findByUserName(userName);
         if (loginParaRemover == null) {
 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
@@ -122,14 +127,9 @@ public class LoginUsuarioService {
         return loginUsuarioRepository.findById(id);
     }
 
-    public LoginUsuario findByCnpj(String cnpj) {
-        return loginUsuarioRepository.findByCnpj(cnpj);
+    public LoginUsuario findByUserName(String userName) {
+        return loginUsuarioRepository.findByUserName(userName);
     }
-
-    public Usuario findByRazaoSocial(String razaoSocial) {
-        return usuarioRepository.findByRazaoSocial(razaoSocial);
-    }
-
     public LoginUsuario atualizarLoginPorId(String novaSenha, Long id) {
 
         Optional<LoginUsuario> loginUsuarioOptional = loginUsuarioRepository.findById(id);
