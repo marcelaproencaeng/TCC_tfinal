@@ -6,6 +6,7 @@ import fundatec.org.bluerecycling.repository.ResiduoRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class ResiduoService {
 
     private final ResiduoRepository residuoRepository;
+
     public ResiduoService(ResiduoRepository residuoRepository) {
         this.residuoRepository = residuoRepository;
     }
+
     public Residuo adicionarResiduo(ResiduoDTO residuoDTO) {
 
         Residuo residuoASerAdicionado = new Residuo();

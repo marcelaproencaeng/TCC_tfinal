@@ -41,8 +41,9 @@ public class UsuarioService {
         return usuarioRepository.save(usuarioASerAdicionado);
     }
 
+
     public Usuario findByRazaoSocial(String razaoSocial) {
-        return usuarioRepository.findById(razaoSocial);
+        return usuarioRepository.findByRazaoSocial(razaoSocial);
 
     }
 }

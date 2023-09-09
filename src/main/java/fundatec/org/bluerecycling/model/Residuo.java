@@ -42,11 +42,9 @@ public class Residuo {
     public Residuo() {
 
     }
-
     public Residuo(Long idResiduo, String nome,
                    TipoResiduo classificacao, TipoNicho nicho,
                    Double quantidade, BigDecimal valor, List<Usuario> usuarios) {
-
         this.idResiduo = idResiduo;
         this.nome = nome;
         this.classificacao = classificacao;

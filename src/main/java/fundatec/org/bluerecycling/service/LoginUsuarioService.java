@@ -8,6 +8,7 @@ import fundatec.org.bluerecycling.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,15 +17,17 @@ public class LoginUsuarioService {
     private final LoginUsuarioRepository loginUsuarioRepository;
     private final UsuarioRepository usuarioRepository;
 
+
     public LoginUsuarioService(LoginUsuarioRepository loginUsuarioRepository,
                                UsuarioRepository usuarioRepository) {
         this.loginUsuarioRepository = loginUsuarioRepository;
         this.usuarioRepository = usuarioRepository;
+
     }
 
-    public LoginUsuario adicionarLogin(LoginUsuarioDTO loginUsuarioDTO) {
+    public LoginUsuario adicionarLogin(CriarLoginUsuarioDTO criarLoginUsuarioDTO) {
 
-        Usuario usuario = usuarioRepository.findByCnpj(loginUsuarioDTO.getUserName());
+        Usuario usuario = usuarioRepository.findByCnpj(criarLoginUsuarioDTO.getCnpj());
 
 //        Optional<Residuo> residuo = residuoRepository.findById(residuoDTO.getIdResiduo());
         if (usuario.usuarioExists(usuario) == false | usuario == null) {
@@ -34,35 +37,46 @@ public class LoginUsuarioService {
 
         }
 
+//        Pedido novoPedido = new Pedido();
+//        novoPedido.setUsuario(usuario);
         Usuario usuarioASerAdicionado = new Usuario();
         usuarioASerAdicionado.setCnpj(usuario.getCnpj());
         usuarioASerAdicionado.setResiduos(usuario.getResiduos());
-//        usuarioASerAdicionado.setPlano(usuario.getPlano());
-//        usuarioASerAdicionado.setContato(usuario.getContato());
+//      usuarioASerAdicionado.setPlano(usuario.getPlano());
+//      usuarioASerAdicionado.setContato(usuario.getContato());
         usuarioASerAdicionado.setEmail(usuario.getEmail());
         usuarioASerAdicionado.setHasTransporte(usuario.getHasTransporte());
-        usuarioASerAdicionado.setHasResiduo(usuario.getHasResiduo());
+        usuarioASerAdicionado.setHasResiduoDeInteresse(usuario.getHasResiduoDeInteresse());
         usuarioASerAdicionado.setRazaoSocial(usuario.getRazaoSocial());
 
-        Usuario usuario1 = findByCnpj(usuarioASerAdicionado.getCnpj());
-        if (usuario1 != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário" + usuario1.getCnpj() +
-                    "já existe!");
+        Optional<Usuario> usuario1 = findById(usuarioASerAdicionado.getIdUsuario());
+        if (usuario1.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário"
+                    + usuario1.get().getIdUsuario() +
+                    "não existe!");
 
         }
 
         LoginUsuario loginASerAdicionado = new LoginUsuario();
-        loginASerAdicionado.setUserName(loginUsuarioDTO.getUserName());
-        loginASerAdicionado.setSenha(loginUsuarioDTO.getSenha());
-        LoginUsuario loginUsuario = findByUserName(loginASerAdicionado.getUserName());
+        loginASerAdicionado.setUserName(criarLoginUsuarioDTO.getCnpj());
+        loginASerAdicionado.setSenha(criarLoginUsuarioDTO.getSenha());
+        LoginUsuario loginUsuario = findByCnpj(loginASerAdicionado.getUserName());
+        if (loginUsuario != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login" +
+                    loginUsuario.getUserName() +
+                    "já existe!");
+
+        }
+
         loginUsuarioRepository.save(loginASerAdicionado);
         return loginASerAdicionado;
     }
 
-    private Usuario findByCnpj(String cnpj) {
+    public LoginUsuario findByCnpj(String cnpj) {
 
         return loginUsuarioRepository.findByCnpj(cnpj);
     }
+
 
     public List<LoginUsuario> buscarTodos() {
 
@@ -123,13 +137,14 @@ public class LoginUsuarioService {
 //        usuarioRepository.delete(usuarioParaRemover);
 //    }
 
-    private Optional<LoginUsuario> findById(Long id) {
-        return loginUsuarioRepository.findById(id);
+    private Optional<Usuario> findById(Long idUsuario) {
+        return usuarioRepository.findById(idUsuario);
     }
 
     public LoginUsuario findByUserName(String userName) {
         return loginUsuarioRepository.findByUserName(userName);
     }
+
     public LoginUsuario atualizarLoginPorId(String novaSenha, Long id) {
 
         Optional<LoginUsuario> loginUsuarioOptional = loginUsuarioRepository.findById(id);

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CriarLoginUsuarioDTO {
-    private String Username;
+    private String cnpj;
     private String senha;
 }
 

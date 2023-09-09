@@ -12,7 +12,7 @@ public class LoginUsuario {
     @Column
     private Long id;
     @Column
-    private String userName;
+    private String UserName;
     @Column
     private String senha;
 
@@ -20,9 +20,9 @@ public class LoginUsuario {
 
     }
 
-    public LoginUsuario(Long id, String userName, String senha) {
+    public LoginUsuario(Long id, String UserName, String senha) {
         this.id = id;
-        this.userName= userName;
+        this.UserName= UserName;
         this.senha = senha;
     }
 }

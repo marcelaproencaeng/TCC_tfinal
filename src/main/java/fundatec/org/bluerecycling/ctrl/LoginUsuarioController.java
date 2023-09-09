@@ -1,5 +1,6 @@
 package fundatec.org.bluerecycling.ctrl;
 
+import fundatec.org.bluerecycling.dto.CriarLoginUsuarioDTO;
 import fundatec.org.bluerecycling.dto.LoginUsuarioDTO;
 import fundatec.org.bluerecycling.model.LoginUsuario;
 import fundatec.org.bluerecycling.service.LoginUsuarioService;
@@ -20,9 +21,9 @@ public class LoginUsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<LoginUsuario> create(@RequestBody LoginUsuarioDTO loginUsuarioDTO) {
-        System.out.println("inserindo login" + loginUsuarioDTO.getUserName());
-        LoginUsuario login = loginUsuarioService.adicionarLogin(loginUsuarioDTO);
+    public ResponseEntity<LoginUsuario> create(@RequestBody CriarLoginUsuarioDTO criarLoginUsuarioDTO) {
+        System.out.println("inserindo login" + criarLoginUsuarioDTO.getCnpj());
+        LoginUsuario login = loginUsuarioService.adicionarLogin(criarLoginUsuarioDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
