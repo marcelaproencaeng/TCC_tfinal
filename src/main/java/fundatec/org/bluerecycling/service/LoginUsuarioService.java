@@ -8,7 +8,6 @@ import fundatec.org.bluerecycling.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -124,25 +123,17 @@ public class LoginUsuarioService {
         if (loginParaRemover == null) {
 
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Não é possível remover um login por cnpj inexistente");
+                    "Não é possível remover um login por UserName inexistente");
         }
         loginUsuarioRepository.delete(loginParaRemover);
     }
-//      public void deletar(String userName) {
-//        Usuario usuarioParaRemover = findByUsername(userName);
-//        if (usuarioParaRemover == null) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-//                    "Não é possível remover usuário inexistente");
-//        }
-//        usuarioRepository.delete(usuarioParaRemover);
-//    }
 
     private Optional<Usuario> findById(Long idUsuario) {
         return usuarioRepository.findById(idUsuario);
     }
 
-    public LoginUsuario findByUserName(String userName) {
-        return loginUsuarioRepository.findByUserName(userName);
+    public LoginUsuario findByUserName(String UserName) {
+        return loginUsuarioRepository.findByUserName(UserName);
     }
 
     public LoginUsuario atualizarLoginPorId(String novaSenha, Long id) {

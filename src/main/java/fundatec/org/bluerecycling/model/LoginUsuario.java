@@ -12,17 +12,17 @@ public class LoginUsuario {
     @Column
     private Long id;
     @Column
-    private String UserName;
+    private String userName;
     @Column
     private String senha;
 
-    public LoginUsuario(){
+    public LoginUsuario() {
 
     }
 
-    public LoginUsuario(Long id, String UserName, String senha) {
+    public LoginUsuario(Long id, String userName, String senha) {
         this.id = id;
-        this.UserName= UserName;
+        this.userName = userName;
         this.senha = senha;
     }
 }

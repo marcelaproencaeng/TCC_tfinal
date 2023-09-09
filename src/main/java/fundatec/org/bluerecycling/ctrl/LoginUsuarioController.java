@@ -1,7 +1,6 @@
 package fundatec.org.bluerecycling.ctrl;
 
 import fundatec.org.bluerecycling.dto.CriarLoginUsuarioDTO;
-import fundatec.org.bluerecycling.dto.LoginUsuarioDTO;
 import fundatec.org.bluerecycling.model.LoginUsuario;
 import fundatec.org.bluerecycling.service.LoginUsuarioService;
 import org.springframework.http.HttpStatus;
@@ -34,15 +33,15 @@ public class LoginUsuarioController {
 //
 //    }
 
-//    @DeleteMapping("/{cnpj}")
-//    public void deletarLoginPorCnpj(@PathVariable("cnpj") String cnpj) {
-//        this.loginUsuarioService.deletar(cnpj);
-//    }
+    @DeleteMapping("/{userName}")
+    public void deletarLoginPorUserName(@PathVariable("userName") String userName) {
+        this.loginUsuarioService.deletar(userName);
+    }
 
-//    @PutMapping("/{id}/{senha}")
-//    public ResponseEntity<LoginUsuario> atualizarSenhaDeLoginPorId(@PathVariable("id") Long id,
-//                                                                   @PathVariable("senha") String senha) {
-//        loginUsuarioService.atualizarLoginPorId(senha, id);
-//        return ResponseEntity.status(HttpStatus.OK).build();
-//    }
+    @PutMapping("/{id}/{senha}")
+    public ResponseEntity<LoginUsuario> atualizarSenhaDeLoginPorId(@PathVariable("id") Long id,
+                                                                   @PathVariable("senha") String senha) {
+        loginUsuarioService.atualizarLoginPorId(senha, id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
