@@ -2,6 +2,8 @@ package fundatec.org.bluerecycling.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(nullable = false)
     private Long idUsuario;
     @Column(name = "razãoSocial", length = 255)
     private String razaoSocial;
@@ -20,10 +22,10 @@ public class Usuario {
 //    private Endereco endereco;
 //    @Column
 //    private Contato contato;
-    @Column(name = "hasCnpj")
+    @Column(name = "tem_cnpj")
     private Boolean hasCnpj;
-    @Column(name = "UserName", length = 14)
-    private String UserName;
+    @Column(name = "userName", length = 14)
+    private String userName;
     @Column(name = "cnpj", length = 14)
     private String cnpj;
     @Column(name = "nome", length = 255)
@@ -33,13 +35,13 @@ public class Usuario {
     private List<Residuo> residuos;
     //    @ManyToOne
 //    private Plano plano;
-    @Column
+    @Column(name = "resíduo_de_interesse")
     private Boolean hasResiduoDeInteresse;
-    @Column
+    @Column(name = "vendedor")
     private Boolean isVendedor;
-    @Column
+    @Column(name = "Transporte")
     private Boolean hasTransporte;
-    @Column
+    @Column(name = "Email")
     private String email;
 
 
@@ -51,7 +53,7 @@ public class Usuario {
                    String razaoSocial,
 //                   Endereco endereco,
 //                   Contato contato,
-                   Boolean hasCnpj, String UserName, String cnpj,
+                   Boolean hasCnpj, String userName, String cnpj,
                    String nome, List<Residuo> residuos,
 //                   Plano plano,
                    Boolean hasResiduoDeInteresse, Boolean isVendedor,
@@ -61,7 +63,7 @@ public class Usuario {
 //        this.endereco = endereco;
 //        this.contato = contato;
         this.hasCnpj = hasCnpj;
-        this.UserName = UserName;
+        this.userName = userName;
         this.cnpj = cnpj;
         this.nome = nome;
         this.residuos = residuos;
@@ -72,10 +74,25 @@ public class Usuario {
         this.email = email;
     }
 
+    //    public Boolean usuarioExists(Usuario usuario) {
+//        if (!usuario.hasCnpj | !usuario.hasResiduoDeInteresse) {
+//            throw new RuntimeException("Usuário inválido!");
+//        }
+//        return true;
+//    }
     public Boolean usuarioExists(Usuario usuario) {
-        if (!usuario.hasCnpj && !usuario.hasResiduoDeInteresse) {
-            throw new RuntimeException("Usuário inválido!");
+        if (!usuario.hasCnpj || !usuario.hasResiduoDeInteresse) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O usuário não atende aos critérios necessários");
         }
         return true;
+    }
+
+    public Boolean userNameValue(Usuario usuario) {
+        if (!(usuario.getUserName() == cnpj)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "UserName inválido!");
+
+        }
+        return true;
+
     }
 }

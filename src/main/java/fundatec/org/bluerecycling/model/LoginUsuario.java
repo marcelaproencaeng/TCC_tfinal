@@ -9,11 +9,11 @@ import lombok.Data;
 public class LoginUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(nullable = false)
     private Long id;
-    @Column
+    @Column(name="userName")
     private String userName;
-    @Column
+    @Column(name="senha")
     private String senha;
 
     public LoginUsuario() {

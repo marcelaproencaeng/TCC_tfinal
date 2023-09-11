@@ -1,12 +1,14 @@
 package fundatec.org.bluerecycling.ctrl;
 
 import fundatec.org.bluerecycling.dto.CriarLoginUsuarioDTO;
+import fundatec.org.bluerecycling.dto.LoginUsuarioDTO;
 import fundatec.org.bluerecycling.model.LoginUsuario;
 import fundatec.org.bluerecycling.service.LoginUsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -20,18 +22,19 @@ public class LoginUsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<LoginUsuario> create(@RequestBody CriarLoginUsuarioDTO criarLoginUsuarioDTO) {
-        System.out.println("inserindo login" + criarLoginUsuarioDTO.getCnpj());
-        LoginUsuario login = loginUsuarioService.adicionarLogin(criarLoginUsuarioDTO);
+    public ResponseEntity<String> create(@RequestBody CriarLoginUsuarioDTO criarLoginUsuarioDTO) {
+        System.out.println("inserindo login" + criarLoginUsuarioDTO.getUserName());
+        String login = loginUsuarioService.adicionarLogin(criarLoginUsuarioDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
+//        return ResponseEntity.ok("Login: " + login);
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<LoginUsuario>> buscarTodos() {
-//        List<LoginUsuario> login = loginUsuarioService.buscarTodos();
-//        return ResponseEntity.ok((List<LoginUsuario>) this.loginUsuarioService.buscarTodos());
-//
-//    }
+    @GetMapping
+    public ResponseEntity<List<LoginUsuario>> buscarTodos() {
+        List<LoginUsuario> login = loginUsuarioService.buscarTodos();
+        return ResponseEntity.ok((List<LoginUsuario>) this.loginUsuarioService.buscarTodos());
+
+    }
 
     @DeleteMapping("/{userName}")
     public void deletarLoginPorUserName(@PathVariable("userName") String userName) {

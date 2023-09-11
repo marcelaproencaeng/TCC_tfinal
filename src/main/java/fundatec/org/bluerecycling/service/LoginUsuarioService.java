@@ -24,20 +24,21 @@ public class LoginUsuarioService {
 
     }
 
-    public LoginUsuario adicionarLogin(CriarLoginUsuarioDTO criarLoginUsuarioDTO) {
+    public String adicionarLogin(CriarLoginUsuarioDTO criarLoginUsuarioDTO) {
 
-        Usuario usuario = usuarioRepository.findByCnpj(criarLoginUsuarioDTO.getCnpj());
+        Usuario usuario = usuarioRepository.findByUserName(criarLoginUsuarioDTO.getUserName());
 
 //        Optional<Residuo> residuo = residuoRepository.findById(residuoDTO.getIdResiduo());
-        if (usuario.usuarioExists(usuario) == false | usuario == null) {
+        if (usuario.usuarioExists(usuario) == false || usuario == null || usuario.userNameValue(usuario) == false) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Login inválido" + usuario.getCnpj() +
                             "usuário não existe e/ou não está cadastrado");
 
         }
 
-//        Pedido novoPedido = new Pedido();
-//        novoPedido.setUsuario(usuario);
+//        LoginUsuario novoLoginUsuario = new LoginUsuario();
+//        novoLoginUsuario.setUsuario(usuario);
+//
         Usuario usuarioASerAdicionado = new Usuario();
         usuarioASerAdicionado.setCnpj(usuario.getCnpj());
         usuarioASerAdicionado.setResiduos(usuario.getResiduos());
@@ -54,12 +55,13 @@ public class LoginUsuarioService {
                     + usuario1.get().getIdUsuario() +
                     "não existe!");
 
+
         }
 
-        LoginUsuario loginASerAdicionado = new LoginUsuario();
-        loginASerAdicionado.setUserName(criarLoginUsuarioDTO.getCnpj());
-        loginASerAdicionado.setSenha(criarLoginUsuarioDTO.getSenha());
-        LoginUsuario loginUsuario = findByCnpj(loginASerAdicionado.getUserName());
+        LoginUsuario novoLoginASerAdicionado = new LoginUsuario();
+        novoLoginASerAdicionado.setUserName(criarLoginUsuarioDTO.getUserName());
+        novoLoginASerAdicionado.setSenha(criarLoginUsuarioDTO.getSenha());
+        LoginUsuario loginUsuario = findByUserName(novoLoginASerAdicionado.getUserName());
         if (loginUsuario != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login" +
                     loginUsuario.getUserName() +
@@ -67,20 +69,15 @@ public class LoginUsuarioService {
 
         }
 
-        loginUsuarioRepository.save(loginASerAdicionado);
-        return loginASerAdicionado;
+        loginUsuarioRepository.save(novoLoginASerAdicionado);
+        return String.valueOf(novoLoginASerAdicionado);
     }
-
-    public LoginUsuario findByCnpj(String cnpj) {
-
-        return loginUsuarioRepository.findByCnpj(cnpj);
-    }
-
 
     public List<LoginUsuario> buscarTodos() {
 
         return loginUsuarioRepository.findAll();
     }
+
 
 //    public ResponseEntity LoginUsuario (ResiduoDTO residuoDTO, LoginUsuarioDTO loginUsuarioDTO) {
 //
@@ -132,8 +129,8 @@ public class LoginUsuarioService {
         return usuarioRepository.findById(idUsuario);
     }
 
-    public LoginUsuario findByUserName(String UserName) {
-        return loginUsuarioRepository.findByUserName(UserName);
+    public LoginUsuario findByUserName(String userName) {
+        return loginUsuarioRepository.findByUserName(userName);
     }
 
     public LoginUsuario atualizarLoginPorId(String novaSenha, Long id) {

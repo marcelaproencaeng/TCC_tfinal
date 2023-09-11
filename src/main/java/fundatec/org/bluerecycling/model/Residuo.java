@@ -21,20 +21,20 @@ import java.util.List;
 public class Residuo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(nullable = false)
     private Long idResiduo;
-    @Column
+    @Column(name="nome")
     private String nome;
-    @Column
+    @Column(name="classificação_tipo_residuo")
     @Enumerated(EnumType.STRING)
     private TipoResiduo classificacao;
     @JoinColumn(name = "id_residuo")
-    @Column
+    @Column(name="nicho")
     @Enumerated(EnumType.STRING)
     private TipoNicho nicho;
-    @Column
+    @Column(name="quantidade")
     private Double quantidade;
-    @Column
+    @Column(name="valor")
     private BigDecimal valor;
     @ManyToMany(mappedBy = "residuos")
     private List<Usuario> usuarios;

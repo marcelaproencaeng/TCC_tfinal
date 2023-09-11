@@ -17,6 +17,8 @@ public class UsuarioDTO {
 //    private Endereco endereco;
 //    private Contato contato;
     private Boolean hasCnpj;
+
+    private String userName;
     private String cnpj;
     private String nome;
     private List<Residuo> residuos;
