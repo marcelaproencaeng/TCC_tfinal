@@ -1,6 +1,7 @@
 package fundatec.org.bluerecycling.service;
 
 import fundatec.org.bluerecycling.dto.UsuarioDTO;
+import fundatec.org.bluerecycling.model.Residuo;
 import fundatec.org.bluerecycling.model.Usuario;
 import fundatec.org.bluerecycling.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -50,6 +52,30 @@ public class UsuarioService {
 
     public List<Usuario> buscarTodos() {
         return usuarioRepository.findAll();
+    }
+    public void deletar(String cnpj) {
+        Usuario usuarioParaRemover = findByCnpj(cnpj);
+        if (usuarioParaRemover == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Não é possível remover usuário inexistente");
+        }
+        usuarioRepository.delete(usuarioParaRemover);
+    }
+    public Usuario findByCnpj(String cnpj) {
+        return usuarioRepository.findByCnpj(cnpj);
+    }
+
+    public Usuario atualizarEmailPorId(String novoEmail, Long idUsuario) {
+
+        Optional<Usuario> residuoOptional = usuarioRepository.findById(idUsuario);
+        if (residuoOptional.isPresent()) {
+            Usuario usuario = residuoOptional.get();
+            usuario.setEmail(novoEmail);
+            return usuarioRepository.save(usuario);
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Usuário não encontrado com o id" + idUsuario);
+        }
     }
 }
 

@@ -7,8 +7,10 @@ import fundatec.org.bluerecycling.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/usuarios")
@@ -19,14 +21,30 @@ public class UsuarioController {
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
+
     @PostMapping
     public ResponseEntity<Usuario> create(@RequestBody UsuarioDTO usuarioDTO) {
         System.out.println("Inserindo o usuário:" + usuarioDTO.getRazaoSocial());
         Usuario usuario = usuarioService.adicionarUsuario(usuarioDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
     @GetMapping
     public ResponseEntity<List<Usuario>> buscarTodos() {
         return ResponseEntity.ok((List<Usuario>) this.usuarioService.buscarTodos());
     }
+
+    @DeleteMapping("/{cnpj}")
+    public void deletarUsuarioPorNome(@PathVariable("cnpj") String cnpj) {
+
+        this.usuarioService.deletar(cnpj);
+    }
+
+    @PutMapping("/{idUsuario}/{email}")
+    public ResponseEntity<Usuario> atualizarEmailDeUsuarioPorId(@PathVariable("idUsuario") Long idUsuario,
+                                                                @PathVariable("email") String email) {
+        usuarioService.atualizarEmailPorId(email, idUsuario);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 }
