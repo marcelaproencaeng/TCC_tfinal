@@ -1,7 +1,6 @@
 package fundatec.org.bluerecycling.ctrl;
 
 import fundatec.org.bluerecycling.dto.CriarLoginUsuarioDTO;
-import fundatec.org.bluerecycling.dto.LoginUsuarioDTO;
 import fundatec.org.bluerecycling.model.LoginUsuario;
 import fundatec.org.bluerecycling.service.LoginUsuarioService;
 import org.springframework.http.HttpStatus;

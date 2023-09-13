@@ -5,8 +5,6 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
 @Entity
 @Table(name = "tb_usuario")
 @Data
@@ -14,7 +12,8 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
+    @Column
+//            (nullable = false)
     private Long idUsuario;
     @Column(name = "razãoSocial", length = 255)
     private String razaoSocial;
@@ -30,9 +29,9 @@ public class Usuario {
     private String cnpj;
     @Column(name = "nome", length = 255)
     private String nome;
-    @ManyToMany
-    @JoinTable(name = "associacao_usuario_residuo")
-    private List<Residuo> residuos;
+    //    @ManyToMany
+//    @JoinTable(name = "associacao_usuario_residuo")
+//    private List<Residuo> residuos;
     //    @ManyToOne
 //    private Plano plano;
     @Column(name = "resíduo_de_interesse")
@@ -54,7 +53,8 @@ public class Usuario {
 //                   Endereco endereco,
 //                   Contato contato,
                    Boolean hasCnpj, String userName, String cnpj,
-                   String nome, List<Residuo> residuos,
+                   String nome,
+//                   List<Residuo> residuos,
 //                   Plano plano,
                    Boolean hasResiduoDeInteresse, Boolean isVendedor,
                    Boolean hasTransporte, String email) {
@@ -66,7 +66,7 @@ public class Usuario {
         this.userName = userName;
         this.cnpj = cnpj;
         this.nome = nome;
-        this.residuos = residuos;
+//        this.residuos = residuos;
 //        this.plano = plano;
         this.hasResiduoDeInteresse = hasResiduoDeInteresse;
         this.isVendedor = isVendedor;
@@ -81,18 +81,26 @@ public class Usuario {
 //        return true;
 //    }
     public Boolean usuarioExists(Usuario usuario) {
-        if (!usuario.hasCnpj || !usuario.hasResiduoDeInteresse) {
+        if (!usuario.hasCnpj == true || !usuario.hasResiduoDeInteresse == true ||
+                usuario.getCnpj() == null || usuario.getHasResiduoDeInteresse() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O usuário não atende aos critérios necessários");
         }
         return true;
     }
 
     public Boolean userNameValue(Usuario usuario) {
-        if (!(usuario.getUserName() == cnpj)) {
+        if (!(usuario.getUserName() == cnpj) || usuario.getUserName() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "UserName inválido!");
 
         }
         return true;
 
+    }
+
+    public Boolean hasInteresse(Usuario usuario) {
+        if (usuario.getHasResiduoDeInteresse() == null || usuario.hasResiduoDeInteresse == false) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O usuário não tem resíduo de interesse");
+        }
+        return true;
     }
 }

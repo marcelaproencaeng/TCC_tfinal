@@ -21,9 +21,9 @@ public class UsuarioDTO {
     private String userName;
     private String cnpj;
     private String nome;
-    private List<Residuo> residuos;
+//    private List<Residuo> residuos;
 //    private Plano plano;
-    private Boolean hasResiduo;
+    private Boolean hasResiduoDeInteresse;
     private Boolean isVendedor;
     private Boolean hasTransporte;
     private String email;

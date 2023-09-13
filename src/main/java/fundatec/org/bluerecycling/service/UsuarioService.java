@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class UsuarioService {
@@ -25,13 +25,14 @@ public class UsuarioService {
         usuarioASerAdicionado.setHasTransporte(usuarioDTO.getHasTransporte());
         usuarioASerAdicionado.setIsVendedor(usuarioDTO.getIsVendedor());
 //        usuarioASerAdicionado.setPlano(usuarioDTO.getPlano());
+        usuarioASerAdicionado.setHasResiduoDeInteresse(usuarioDTO.getHasResiduoDeInteresse());
         usuarioASerAdicionado.setCnpj(usuarioDTO.getCnpj());
         usuarioASerAdicionado.setEmail(usuarioDTO.getEmail());
         usuarioASerAdicionado.setRazaoSocial(usuarioDTO.getRazaoSocial());
         usuarioASerAdicionado.setHasCnpj(usuarioDTO.getHasCnpj());
         usuarioASerAdicionado.setIsVendedor(usuarioDTO.getIsVendedor());
         usuarioASerAdicionado.setNome(usuarioDTO.getNome());
-        usuarioASerAdicionado.setResiduos(usuarioDTO.getResiduos());
+//        usuarioASerAdicionado.setResiduos(usuarioDTO.getResiduos());
 
         Usuario usuario = findByRazaoSocial(usuarioASerAdicionado.getRazaoSocial());
         if (usuario != null) {
@@ -45,6 +46,10 @@ public class UsuarioService {
     public Usuario findByRazaoSocial(String razaoSocial) {
         return usuarioRepository.findByRazaoSocial(razaoSocial);
 
+    }
+
+    public List<Usuario> buscarTodos() {
+        return usuarioRepository.findAll();
     }
 }
 

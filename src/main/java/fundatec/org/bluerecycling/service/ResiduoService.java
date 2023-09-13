@@ -54,16 +54,16 @@ public class ResiduoService {
     }
 
 
-    public Residuo atualizarQuantidadePorId(Double novaQuantidade, Long id) {
+    public Residuo atualizarQuantidadePorId(Double novaQuantidade, Long idResiduo) {
 
-        Optional<Residuo> residuoOptional = residuoRepository.findById(id);
+        Optional<Residuo> residuoOptional = residuoRepository.findById(idResiduo);
         if (residuoOptional.isPresent()) {
             Residuo residuo = residuoOptional.get();
             residuo.setQuantidade(novaQuantidade);
             return residuoRepository.save(residuo);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Resíduo não encontrado com o id" + id);
+                    "Resíduo não encontrado com o id" + idResiduo);
         }
     }
 }

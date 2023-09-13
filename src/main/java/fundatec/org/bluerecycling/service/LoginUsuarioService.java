@@ -31,7 +31,7 @@ public class LoginUsuarioService {
 //        Optional<Residuo> residuo = residuoRepository.findById(residuoDTO.getIdResiduo());
         if (usuario.usuarioExists(usuario) == false || usuario == null || usuario.userNameValue(usuario) == false) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Login inválido" + usuario.getCnpj() +
+                    "Login inválido" + usuario.getUserName() +
                             "usuário não existe e/ou não está cadastrado");
 
         }
@@ -41,9 +41,10 @@ public class LoginUsuarioService {
 //
         Usuario usuarioASerAdicionado = new Usuario();
         usuarioASerAdicionado.setCnpj(usuario.getCnpj());
-        usuarioASerAdicionado.setResiduos(usuario.getResiduos());
+//        usuarioASerAdicionado.setResiduos(usuario.getResiduos());
 //      usuarioASerAdicionado.setPlano(usuario.getPlano());
 //      usuarioASerAdicionado.setContato(usuario.getContato());
+        usuarioASerAdicionado.setUserName(usuario.getUserName());
         usuarioASerAdicionado.setEmail(usuario.getEmail());
         usuarioASerAdicionado.setHasTransporte(usuario.getHasTransporte());
         usuarioASerAdicionado.setHasResiduoDeInteresse(usuario.getHasResiduoDeInteresse());
