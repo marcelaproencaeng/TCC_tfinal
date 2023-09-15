@@ -8,4 +8,5 @@
 //@Table(name = "tb_contato")
 //@Data
 //public class Contato {
+//
 //}

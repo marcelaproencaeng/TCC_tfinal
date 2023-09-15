@@ -1,6 +1,7 @@
 package fundatec.org.bluerecycling.ctrl;
 
 import fundatec.org.bluerecycling.dto.UsuarioDTO;
+import fundatec.org.bluerecycling.model.LoginUsuario;
 import fundatec.org.bluerecycling.model.Residuo;
 import fundatec.org.bluerecycling.model.Usuario;
 import fundatec.org.bluerecycling.service.UsuarioService;
@@ -24,6 +25,15 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<Usuario> create(@RequestBody UsuarioDTO usuarioDTO) {
+//        String usuario1 = usuarioDTO.getCnpj();
+//        LoginUsuario senha = usuarioDTO.;
+//
+//        if(usuario1.equals("12345678910112") && senha.equals("admin")) {
+//            return ResponseEntity.status(HttpStatus.OK).build();
+//        } else {
+//            return ResponseEntity.status(HttpStatus.OK).build();
+//        }
+
         System.out.println("Inserindo o usuário:" + usuarioDTO.getRazaoSocial());
         Usuario usuario = usuarioService.adicionarUsuario(usuarioDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
@@ -46,5 +56,7 @@ public class UsuarioController {
         usuarioService.atualizarEmailPorId(email, idUsuario);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+
 
 }

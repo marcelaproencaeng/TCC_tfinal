@@ -11,18 +11,21 @@ public class LoginUsuario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private Long id;
-    @Column(name="userName")
+    @Column(name = "userName")
     private String userName;
-    @Column(name="senha")
+    @Column(name = "senha")
     private String senha;
+    @Column(name = "usuario", length = 255)
+    private Usuario usuario;
 
     public LoginUsuario() {
 
     }
 
-    public LoginUsuario(Long id, String userName, String senha) {
+    public LoginUsuario(Long id, String userName, String senha, Usuario usuario) {
         this.id = id;
         this.userName = userName;
         this.senha = senha;
+        this.usuario = usuario;
     }
 }

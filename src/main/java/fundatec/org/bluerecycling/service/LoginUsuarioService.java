@@ -6,8 +6,10 @@ import fundatec.org.bluerecycling.model.Usuario;
 import fundatec.org.bluerecycling.repository.LoginUsuarioRepository;
 import fundatec.org.bluerecycling.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -24,54 +26,67 @@ public class LoginUsuarioService {
 
     }
 
-    public String adicionarLogin(CriarLoginUsuarioDTO criarLoginUsuarioDTO) {
+    public LoginUsuario adicionarLogin(CriarLoginUsuarioDTO criarLoginUsuarioDTO) {
 
-        Usuario usuario = usuarioRepository.findByUserName(criarLoginUsuarioDTO.getUserName());
+        Usuario usuario = usuarioRepository.findByCnpj(criarLoginUsuarioDTO.getUserName());
 
 //        Optional<Residuo> residuo = residuoRepository.findById(residuoDTO.getIdResiduo());
-        if (usuario.usuarioExists(usuario) == false || usuario == null || usuario.userNameValue(usuario) == false) {
+        if (usuario == null || !usuario.usuarioExists(usuario) || !usuario.userNameValue(usuario)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Login inválido" + usuario.getUserName() +
+                    "Login inválido" + criarLoginUsuarioDTO.getUserName() +
                             "usuário não existe e/ou não está cadastrado");
 
         }
+//        LoginUsuario loginUsuario = criarLoginUsuarioDTO.getSenha();
+//        LoginUsuario loginUsuario1 = criarLoginUsuarioDTO.getUserName();
+//
+//        if (loginUsuario1.equals("12345678901234") && loginUsuario.equals("admin")) {
+//            return ResponseEntity.status(HttpStatus.OK).build();
+
+
+        LoginUsuario loginASerAdicionado = new LoginUsuario();
+        loginASerAdicionado.setUserName(String.valueOf(criarLoginUsuarioDTO.getUserName().equals("12345678901234")));
+        loginASerAdicionado.setSenha(String.valueOf(criarLoginUsuarioDTO.getSenha().equals("admin")));
+        loginUsuarioRepository.save(loginASerAdicionado);
+        return loginASerAdicionado;
+
 
 //        LoginUsuario novoLoginUsuario = new LoginUsuario();
 //        novoLoginUsuario.setUsuario(usuario);
 //
-        Usuario usuarioASerAdicionado = new Usuario();
-        usuarioASerAdicionado.setCnpj(usuario.getCnpj());
-//        usuarioASerAdicionado.setResiduos(usuario.getResiduos());
-//      usuarioASerAdicionado.setPlano(usuario.getPlano());
-//      usuarioASerAdicionado.setContato(usuario.getContato());
-        usuarioASerAdicionado.setUserName(usuario.getUserName());
-        usuarioASerAdicionado.setEmail(usuario.getEmail());
-        usuarioASerAdicionado.setHasTransporte(usuario.getHasTransporte());
-        usuarioASerAdicionado.setHasResiduoDeInteresse(usuario.getHasResiduoDeInteresse());
-        usuarioASerAdicionado.setRazaoSocial(usuario.getRazaoSocial());
+//        Usuario usuarioASerAdicionado = new Usuario();
+//        usuarioASerAdicionado.setCnpj(usuario.getCnpj());
+////        usuarioASerAdicionado.setResiduos(usuario.getResiduos());
+////      usuarioASerAdicionado.setPlano(usuario.getPlano());
+////      usuarioASerAdicionado.setContato(usuario.getContato());
+//        usuarioASerAdicionado.setEmail(usuario.getEmail());
+//        usuarioASerAdicionado.setHasTransporte(usuario.getHasTransporte());
+//        usuarioASerAdicionado.setHasResiduoDeInteresse(usuario.getHasResiduoDeInteresse());
+//        usuarioASerAdicionado.setRazaoSocial(usuario.getRazaoSocial());
+//
+//        Optional<Usuario> usuario1 = findById(usuarioASerAdicionado.getIdUsuario());
+//        if (usuario1.isEmpty()) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário"
+//                    + usuario1.get().getIdUsuario() +
+//                    "não existe!");
+//
+//
+//        }
+//
+//        LoginUsuario novoLoginASerAdicionado = new LoginUsuario();
+//        novoLoginASerAdicionado.setUserName(criarLoginUsuarioDTO.getUserName());
+//        novoLoginASerAdicionado.setSenha(criarLoginUsuarioDTO.getSenha());
+//        LoginUsuario loginUsuario = findByUserName(novoLoginASerAdicionado.getUserName());
+//        if (loginUsuario != null) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login" +
+//                    loginUsuario.getUserName() +
+//                    "já existe!");
+//
+//        }
 
-        Optional<Usuario> usuario1 = findById(usuarioASerAdicionado.getIdUsuario());
-        if (usuario1.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário"
-                    + usuario1.get().getIdUsuario() +
-                    "não existe!");
+//        loginUsuarioRepository.save(novoLoginASerAdicionado);
+//        return String.valueOf(novoLoginASerAdicionado);
 
-
-        }
-
-        LoginUsuario novoLoginASerAdicionado = new LoginUsuario();
-        novoLoginASerAdicionado.setUserName(criarLoginUsuarioDTO.getUserName());
-        novoLoginASerAdicionado.setSenha(criarLoginUsuarioDTO.getSenha());
-        LoginUsuario loginUsuario = findByUserName(novoLoginASerAdicionado.getUserName());
-        if (loginUsuario != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login" +
-                    loginUsuario.getUserName() +
-                    "já existe!");
-
-        }
-
-        loginUsuarioRepository.save(novoLoginASerAdicionado);
-        return String.valueOf(novoLoginASerAdicionado);
     }
 
     public List<LoginUsuario> buscarTodos() {

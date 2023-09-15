@@ -29,11 +29,6 @@ public class Usuario {
     private String cnpj;
     @Column(name = "nome", length = 255)
     private String nome;
-    //    @ManyToMany
-//    @JoinTable(name = "associacao_usuario_residuo")
-//    private List<Residuo> residuos;
-    //    @ManyToOne
-//    private Plano plano;
     @Column(name = "resíduo_de_interesse")
     private Boolean hasResiduoDeInteresse;
     @Column(name = "vendedor")
@@ -42,6 +37,11 @@ public class Usuario {
     private Boolean hasTransporte;
     @Column(name = "Email")
     private String email;
+//    @ManyToMany
+//    @JoinTable(name = "associacao_usuario_residuo")
+//    private List<Residuo> residuos;
+//    @ManyToOne
+//    private Plano plano;
 
 
     public Usuario() {
@@ -81,26 +81,26 @@ public class Usuario {
 //        return true;
 //    }
     public Boolean usuarioExists(Usuario usuario) {
-        if (!usuario.hasCnpj == true || !usuario.hasResiduoDeInteresse == true ||
-                usuario.getCnpj() == null || usuario.getHasResiduoDeInteresse() == null) {
+        if ( usuario.getCnpj() == null||!usuario.hasCnpj == true || usuario.getHasResiduoDeInteresse() == null
+                ||!usuario.hasResiduoDeInteresse == true
+        ) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O usuário não atende aos critérios necessários");
         }
         return true;
     }
 
     public Boolean userNameValue(Usuario usuario) {
-        if (!(usuario.getUserName() == cnpj) || usuario.getUserName() == null) {
+        if (usuario.getUserName() == null || !usuario.getUserName().equals(cnpj)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "UserName inválido!");
-
         }
         return true;
 
     }
 
-    public Boolean hasInteresse(Usuario usuario) {
-        if (usuario.getHasResiduoDeInteresse() == null || usuario.hasResiduoDeInteresse == false) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O usuário não tem resíduo de interesse");
-        }
-        return true;
-    }
+//    public Boolean hasInteresse(Usuario usuario) {
+//        if (usuario.getHasResiduoDeInteresse() == null || usuario.hasResiduoDeInteresse == false) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O usuário não tem resíduo de interesse");
+//        }
+//        return true;
+//    }
 }
