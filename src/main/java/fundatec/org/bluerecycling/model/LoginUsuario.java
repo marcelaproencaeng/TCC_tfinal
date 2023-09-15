@@ -15,17 +15,17 @@ public class LoginUsuario {
     private String userName;
     @Column(name = "senha")
     private String senha;
-    @Column(name = "usuario", length = 255)
-    private Usuario usuario;
+//    @Column(name = "usuario", length = 255)
+//    private Usuario usuario;
 
     public LoginUsuario() {
 
     }
 
-    public LoginUsuario(Long id, String userName, String senha, Usuario usuario) {
+    public LoginUsuario(Long id, String userName, String senha) {
         this.id = id;
         this.userName = userName;
         this.senha = senha;
-        this.usuario = usuario;
+//        this.usuario = usuario;
     }
 }

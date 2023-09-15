@@ -45,8 +45,8 @@ public class LoginUsuarioService {
 
 
         LoginUsuario loginASerAdicionado = new LoginUsuario();
-        loginASerAdicionado.setUserName(String.valueOf(criarLoginUsuarioDTO.getUserName().equals("12345678901234")));
-        loginASerAdicionado.setSenha(String.valueOf(criarLoginUsuarioDTO.getSenha().equals("admin")));
+        loginASerAdicionado.setUserName(criarLoginUsuarioDTO.getUserName());
+        loginASerAdicionado.setSenha(criarLoginUsuarioDTO.getSenha());
         loginUsuarioRepository.save(loginASerAdicionado);
         return loginASerAdicionado;
 

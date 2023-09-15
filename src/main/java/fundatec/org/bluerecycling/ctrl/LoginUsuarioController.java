@@ -21,10 +21,15 @@ public class LoginUsuarioController {
 
     @PostMapping
     public ResponseEntity<LoginUsuario> create(@RequestBody CriarLoginUsuarioDTO criarLoginUsuarioDTO) {
-        System.out.println("inserindo login" + criarLoginUsuarioDTO.getUserName());
-        LoginUsuario login = loginUsuarioService.adicionarLogin(criarLoginUsuarioDTO);
-        return ResponseEntity.status(HttpStatus.OK).build();
+//        System.out.println("inserindo login" + criarLoginUsuarioDTO.getUserName());
+//        LoginUsuario login = loginUsuarioService.adicionarLogin(criarLoginUsuarioDTO);
+//        return ResponseEntity.status(HttpStatus.OK).build();
 //        return ResponseEntity.ok("Login: " + login);
+        if(criarLoginUsuarioDTO.getUserName().equals("marcela") && criarLoginUsuarioDTO.getSenha().equals("admin")) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
     @GetMapping

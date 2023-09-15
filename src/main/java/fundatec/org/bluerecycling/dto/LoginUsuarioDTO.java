@@ -10,5 +10,5 @@ public class LoginUsuarioDTO {
     private Long idLogin;
     private String userName;
     private String senha;
-    private Usuario usuario;
+//    private Usuario usuario;
 }
