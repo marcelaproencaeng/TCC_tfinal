@@ -1,0 +1,6 @@
+#server:
+#  servlet:
+#    context-path: /pokedex
+#port: 8080
+#
+#external-api: https://viacep.com.br/ws/%s/json

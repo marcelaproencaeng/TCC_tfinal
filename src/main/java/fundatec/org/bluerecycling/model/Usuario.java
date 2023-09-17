@@ -37,11 +37,12 @@ public class Usuario {
     private Boolean hasTransporte;
     @Column(name = "Email")
     private String email;
-//    @ManyToMany
+    //    @ManyToMany
 //    @JoinTable(name = "associacao_usuario_residuo")
 //    private List<Residuo> residuos;
 //    @ManyToOne
 //    private Plano plano;
+
 
 
     public Usuario() {
@@ -81,8 +82,8 @@ public class Usuario {
 //        return true;
 //    }
     public Boolean usuarioExists(Usuario usuario) {
-        if ( usuario.getCnpj() == null||!usuario.hasCnpj == true || usuario.getHasResiduoDeInteresse() == null
-                ||!usuario.hasResiduoDeInteresse == true
+        if (usuario.getCnpj() == null || !usuario.hasCnpj == true || usuario.getHasResiduoDeInteresse() == null
+                || !usuario.hasResiduoDeInteresse == true
         ) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O usuário não atende aos critérios necessários");
         }

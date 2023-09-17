@@ -1,38 +1,43 @@
 package fundatec.org.bluerecycling.ctrl;
 
 import fundatec.org.bluerecycling.dto.UsuarioDTO;
-import fundatec.org.bluerecycling.model.LoginUsuario;
-import fundatec.org.bluerecycling.model.Residuo;
 import fundatec.org.bluerecycling.model.Usuario;
 import fundatec.org.bluerecycling.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/usuarios")
 @CrossOrigin(origins = "*")
 public class UsuarioController {
+//     private PokemonIntegrationService pokemonIntegrationService;
+//
+//    public PokemonController(PokemonIntegrationService pokemonIntegrationService) {
+//        this.pokemonIntegrationService = pokemonIntegrationService;
+//    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<PokemonResponse> findById(@PathVariable("id") int id) {
+//        return ResponseEntity.ok(this.pokemonIntegrationService.findById(id));
+//    }
+//
+//    @GetMapping("/name/{name}")
+//    public ResponseEntity<PokemonResponse> findByName(@PathVariable("name") String name) {
+//        return ResponseEntity.ok(this.pokemonIntegrationService.findByName(name));
+//    }
     private UsuarioService usuarioService;
+
 
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
 
+
     @PostMapping
     public ResponseEntity<Usuario> create(@RequestBody UsuarioDTO usuarioDTO) {
-//        String usuario1 = usuarioDTO.getCnpj();
-//        LoginUsuario senha = usuarioDTO.;
-//
-//        if(usuario1.equals("12345678910112") && senha.equals("admin")) {
-//            return ResponseEntity.status(HttpStatus.OK).build();
-//        } else {
-//            return ResponseEntity.status(HttpStatus.OK).build();
-//        }
 
         System.out.println("Inserindo o usuário:" + usuarioDTO.getRazaoSocial());
         Usuario usuario = usuarioService.adicionarUsuario(usuarioDTO);
@@ -56,7 +61,6 @@ public class UsuarioController {
         usuarioService.atualizarEmailPorId(email, idUsuario);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
 
 
 }
