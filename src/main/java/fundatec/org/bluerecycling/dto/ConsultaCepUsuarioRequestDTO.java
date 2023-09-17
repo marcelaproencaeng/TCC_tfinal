@@ -1,10 +1,13 @@
 package fundatec.org.bluerecycling.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
-@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class ConsultaCepUsuarioRequestDTO {
       private String cep;
       private String logradouro;

@@ -1,22 +1,23 @@
 package fundatec.org.bluerecycling.ctrl;
 
 import fundatec.org.bluerecycling.dto.ConsultaCepUsuarioRequestDTO;
+import fundatec.org.bluerecycling.dto.ConsultaCnpjUsuarioRequestDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("consultacepusuarios")
+@RequestMapping("consulta-cnpjusuarios")
 @CrossOrigin(origins = "*")
-public class ConsultaCepUsuarioController {
+public class ConsultaCnpjUsuarioController {
     @GetMapping("/{cnpj}")
-    public ConsultaCepUsuarioRequestDTO consultaCepUsuario(@PathVariable("cep") String cep) {
+    public ConsultaCnpjUsuarioRequestDTO consultaCnpjUsuario(@PathVariable("cnpj") String cnpj) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<ConsultaCepUsuarioRequestDTO> resp =
+        ResponseEntity<ConsultaCnpjUsuarioRequestDTO> resp =
                 restTemplate.getForEntity(
                         String.format(
-                                "https://viacep.com.br/ws/%s/json", cep),
-                        ConsultaCepUsuarioRequestDTO.class);
+                                "https://www.receitaws.com.br/v1/%s/json", cnpj),
+                        ConsultaCnpjUsuarioRequestDTO.class);
         return resp.getBody();
     }
 }
