@@ -13,8 +13,8 @@ public class LoginUsuario {
     private Long id;
     @Column(name = "userName")
     private String userName;
-    @Column(name = "senha")
-    private String senha;
+    @Column(name = "password")
+    private String password;
 //    @Column(name = "usuario", length = 255)
 //    private Usuario usuario;
 
@@ -22,10 +22,10 @@ public class LoginUsuario {
 
     }
 
-    public LoginUsuario(Long id, String userName, String senha) {
+    public LoginUsuario(Long id, String userName, String password) {
         this.id = id;
         this.userName = userName;
-        this.senha = senha;
+        this.password = password;
 //        this.usuario = usuario;
     }
 }

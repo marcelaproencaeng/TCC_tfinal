@@ -1,6 +1,6 @@
 #server:
 #  servlet:
-#    context-path: /pokedex
+#    context-path: /bluerecycling
 #port: 8080
 #
 #external-api: https://viacep.com.br/ws/%s/json

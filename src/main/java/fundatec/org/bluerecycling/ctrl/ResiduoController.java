@@ -1,5 +1,6 @@
 package fundatec.org.bluerecycling.ctrl;
 
+import fundatec.org.bluerecycling.dto.CriarResiduoDTO;
 import fundatec.org.bluerecycling.dto.ResiduoDTO;
 import fundatec.org.bluerecycling.model.Residuo;
 import fundatec.org.bluerecycling.service.ResiduoService;
@@ -20,9 +21,9 @@ public class ResiduoController {
     }
 
     @PostMapping
-    public ResponseEntity<Residuo> create(@RequestBody ResiduoDTO residuoDTO) {
-        System.out.println("Cadastrando resíduo:" + residuoDTO.getNome());
-        Residuo residuo = residuoService.adicionarResiduo(residuoDTO);
+    public ResponseEntity<Residuo> create(@RequestBody CriarResiduoDTO criarResiduoDTO) {
+        System.out.println("Cadastrando resíduo:" + criarResiduoDTO.getNome());
+        Residuo residuo = residuoService.adicionarResiduo(criarResiduoDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

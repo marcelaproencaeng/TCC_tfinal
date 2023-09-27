@@ -50,7 +50,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{cnpj}")
-    public void deletarUsuarioPorNome(@PathVariable("cnpj") String cnpj) {
+    public void deletarUsuarioPorCnpj(@PathVariable("cnpj") String cnpj) {
 
         this.usuarioService.deletar(cnpj);
     }

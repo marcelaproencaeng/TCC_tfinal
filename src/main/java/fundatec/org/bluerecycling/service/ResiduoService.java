@@ -1,5 +1,6 @@
 package fundatec.org.bluerecycling.service;
 
+import fundatec.org.bluerecycling.dto.CriarResiduoDTO;
 import fundatec.org.bluerecycling.dto.ResiduoDTO;
 import fundatec.org.bluerecycling.model.Residuo;
 import fundatec.org.bluerecycling.repository.ResiduoRepository;
@@ -18,15 +19,17 @@ public class ResiduoService {
         this.residuoRepository = residuoRepository;
     }
 
-    public Residuo adicionarResiduo(ResiduoDTO residuoDTO) {
+    public Residuo adicionarResiduo(CriarResiduoDTO criarResiduoDTO) {
 
         Residuo residuoASerAdicionado = new Residuo();
-        residuoASerAdicionado.setIdResiduo(residuoDTO.getIdResiduo());
-        residuoASerAdicionado.setNome(residuoDTO.getNome());
-        residuoASerAdicionado.setClassificacao(residuoDTO.getClassificacao());
-        residuoASerAdicionado.setNicho(residuoDTO.getNicho());
-        residuoASerAdicionado.setQuantidade(residuoDTO.getQuantidade());
-        residuoASerAdicionado.setValor(residuoDTO.getValor());
+        residuoASerAdicionado.setNome(criarResiduoDTO.getNome());
+        residuoASerAdicionado.setDescricao(criarResiduoDTO.getDescricao());
+        residuoASerAdicionado.setLocal(criarResiduoDTO.getLocal());
+        residuoASerAdicionado.setDataCriacao(criarResiduoDTO.getDataCriacao());
+        residuoASerAdicionado.setClassificacao(criarResiduoDTO.getClassificacao());
+        residuoASerAdicionado.setNicho(criarResiduoDTO.getNicho());
+        residuoASerAdicionado.setQuantidade(criarResiduoDTO.getQuantidade());
+        residuoASerAdicionado.setValor(criarResiduoDTO.getValor());
         Residuo residuo = findByNome(residuoASerAdicionado.getNome());
 
         if (residuo != null) {

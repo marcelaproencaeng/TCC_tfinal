@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("consultacepusuarios")
 @CrossOrigin(origins = "*")
 public class ConsultaCepUsuarioController {
-    @GetMapping("/{cnpj}")
+    @GetMapping("/{cep}")
     public ConsultaCepUsuarioRequestDTO consultaCepUsuario(@PathVariable("cep") String cep) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<ConsultaCepUsuarioRequestDTO> resp =

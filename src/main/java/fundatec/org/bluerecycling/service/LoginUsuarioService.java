@@ -46,7 +46,7 @@ public class LoginUsuarioService {
 
         LoginUsuario loginASerAdicionado = new LoginUsuario();
         loginASerAdicionado.setUserName(criarLoginUsuarioDTO.getUserName());
-        loginASerAdicionado.setSenha(criarLoginUsuarioDTO.getSenha());
+        loginASerAdicionado.setPassword(criarLoginUsuarioDTO.getPassword());
         loginUsuarioRepository.save(loginASerAdicionado);
         return loginASerAdicionado;
 
@@ -154,7 +154,7 @@ public class LoginUsuarioService {
         Optional<LoginUsuario> loginUsuarioOptional = loginUsuarioRepository.findById(id);
         if (loginUsuarioOptional.isPresent()) {
             LoginUsuario login = loginUsuarioOptional.get();
-            login.setSenha(novaSenha);
+            login.setPassword(novaSenha);
             return loginUsuarioRepository.save(login);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,

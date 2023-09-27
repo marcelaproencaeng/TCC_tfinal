@@ -24,13 +24,14 @@ public class LoginUsuarioController {
 //        System.out.println("inserindo login" + criarLoginUsuarioDTO.getUserName());
 //        LoginUsuario login = loginUsuarioService.adicionarLogin(criarLoginUsuarioDTO);
 //        return ResponseEntity.status(HttpStatus.OK).build();
-//        return ResponseEntity.ok("Login: " + login);
-        if(criarLoginUsuarioDTO.getUserName().equals("marcela") && criarLoginUsuarioDTO.getSenha().equals("admin")) {
+
+        if (criarLoginUsuarioDTO.getUserName().equals("marcela") && criarLoginUsuarioDTO.getPassword().equals("admin")) {
             return ResponseEntity.status(HttpStatus.OK).build();
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
 
     @GetMapping
     public ResponseEntity<List<LoginUsuario>> buscarTodos() {
@@ -44,10 +45,10 @@ public class LoginUsuarioController {
         this.loginUsuarioService.deletar(userName);
     }
 
-    @PutMapping("/{id}/{senha}")
+    @PutMapping("/{id}/{password}")
     public ResponseEntity<LoginUsuario> atualizarSenhaDeLoginPorId(@PathVariable("id") Long id,
-                                                                   @PathVariable("senha") String senha) {
-        loginUsuarioService.atualizarLoginPorId(senha, id);
+                                                                   @PathVariable("password") String password) {
+        loginUsuarioService.atualizarLoginPorId(password, id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

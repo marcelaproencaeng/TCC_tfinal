@@ -4,11 +4,9 @@ import fundatec.org.bluerecycling.model.enuns.TipoNicho;
 import fundatec.org.bluerecycling.model.enuns.TipoResiduo;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 //import lombok.*;
 import java.math.BigDecimal;
-import java.util.List;
+import java.time.LocalDate;
 
 
 //@Getter
@@ -28,6 +26,12 @@ public class Residuo {
     private Long idResiduo;
     @Column(name = "nome")
     private String nome;
+    @Column(name = "descricao", length = 255)
+    private String descricao;
+    @Column(name = "local")
+    private String local;
+    @Column(name = "dataCriacao")
+    private LocalDate dataCriacao;
     @Column(name = "classificação_tipo_residuo")
     @Enumerated(EnumType.STRING)
     private TipoResiduo classificacao;
@@ -46,13 +50,17 @@ public class Residuo {
 
     }
 
-    public Residuo(Long idResiduo, String nome,
+    public Residuo(Long idResiduo, String nome, String descricao,
+                   String local, LocalDate dataCriacao,
                    TipoResiduo classificacao, TipoNicho nicho,
                    Double quantidade, BigDecimal valor
 //                   List<Usuario> usuarios
     ) {
         this.idResiduo = idResiduo;
         this.nome = nome;
+        this.descricao = descricao;
+        this.local = local;
+        this.dataCriacao = dataCriacao;
         this.classificacao = classificacao;
         this.nicho = nicho;
         this.quantidade = quantidade;
