@@ -6,7 +6,6 @@ import fundatec.org.bluerecycling.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -28,7 +27,7 @@ public class UsuarioController {
 //    public ResponseEntity<PokemonResponse> findByName(@PathVariable("name") String name) {
 //        return ResponseEntity.ok(this.pokemonIntegrationService.findByName(name));
 //    }
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
 
     public UsuarioController(UsuarioService usuarioService) {

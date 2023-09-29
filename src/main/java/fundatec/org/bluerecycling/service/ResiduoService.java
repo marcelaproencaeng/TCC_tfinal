@@ -1,7 +1,6 @@
 package fundatec.org.bluerecycling.service;
 
 import fundatec.org.bluerecycling.dto.CriarResiduoDTO;
-import fundatec.org.bluerecycling.dto.ResiduoDTO;
 import fundatec.org.bluerecycling.model.Residuo;
 import fundatec.org.bluerecycling.repository.ResiduoRepository;
 import org.springframework.http.HttpStatus;

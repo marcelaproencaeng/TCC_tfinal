@@ -14,7 +14,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ResiduoController {
 
-    private ResiduoService residuoService;
+    private final ResiduoService residuoService;
 
     public ResiduoController(ResiduoService residuoService) {
         this.residuoService = residuoService;

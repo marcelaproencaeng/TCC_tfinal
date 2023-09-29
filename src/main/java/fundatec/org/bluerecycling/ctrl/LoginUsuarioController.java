@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("api/v1/logins")
 @CrossOrigin(origins = "*")
 public class LoginUsuarioController {
-    private LoginUsuarioService loginUsuarioService;
+    private final LoginUsuarioService loginUsuarioService;
 
     public LoginUsuarioController(LoginUsuarioService loginUsuarioService) {
         this.loginUsuarioService = loginUsuarioService;
